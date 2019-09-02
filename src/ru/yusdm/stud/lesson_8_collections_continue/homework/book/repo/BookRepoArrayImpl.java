@@ -3,11 +3,12 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookRepoArrayImpl implements BookRepo {
+public class BookRepoArrayImpl implements BookRepo, BaseRepo<Book> {
 
     @Override
     public int count() {

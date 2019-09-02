@@ -1,11 +1,13 @@
 package ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo;
 
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.BaseRepo;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionStorage;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.*;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.IdGenerator;
 
-public class AuthorRepoCollectionImpl implements AuthorRepo {
-    final EntityRepo entity = new EntityRepoImpl();
+import java.util.Iterator;
+
+public class AuthorRepoCollectionImpl implements AuthorRepo, BaseRepo<Author> {
 
     @Override
     public int count() {
@@ -14,16 +16,29 @@ public class AuthorRepoCollectionImpl implements AuthorRepo {
 
     @Override
     public void print() {
-        entity.print(CollectionStorage.getAllAuthors());
+        for (Object element : CollectionStorage.getAllAuthors()) {
+            if (element != null) {
+                System.out.println(element.toString());
+            }
+        }
     }
 
     @Override
     public void delete(Author author) {
-        entity.delete(author, CollectionStorage.getAllAuthors());
+        Iterator<Author> iter = CollectionStorage.getAllAuthors().iterator();
+        while (iter.hasNext()) {
+            boolean idsMatches = author.getId().equals(iter.next().getId());
+            if (idsMatches) {
+                iter.remove();
+                break;
+            }
+        }
     }
 
     @Override
     public Long add(Author author) {
-        return entity.add(author, CollectionStorage.getAllAuthors());
+        author.setId(IdGenerator.generateId());
+        CollectionStorage.getAllAuthors().add(author);
+        return author.getId();
     }
 }

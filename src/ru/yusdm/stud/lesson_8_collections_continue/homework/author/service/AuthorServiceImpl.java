@@ -2,10 +2,11 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework.author.service;
 
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo.AuthorRepo;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.*;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.BaseRepo;
 
-public class AuthorServiceImpl implements AuthorService {
+public class AuthorServiceImpl implements AuthorService, BaseRepo<Author> {
 
     private final AuthorRepo authorRepo;
     private final BookRepo bookRepo;
@@ -22,20 +23,24 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public void deleteBooksWhichOldAndSentReport() {
+
+    }
+
+    @Override
     public void print() {
         authorRepo.print();
     }
-
     /**
-     *  When delete Author
-     *
-     *  Look for books where author present, and remove him from book
-     *
-     *  if (book.getAuthorCount == 0){
-     *      dropBook()
-     *  }
-     *
-     *
+     * When delete Author
+     * <p>
+     * Look for books where author present, and remove him from book
+     * <p>
+     * if (book.getAuthorCount == 0){
+     * dropBook()
+     * }
+     * <p>
+     * <p>
      * ----------
      * When delete book
      * Delete book from storage
@@ -55,6 +60,7 @@ public class AuthorServiceImpl implements AuthorService {
         }
 
         authorRepo.delete(author);
+
     }
 
     @Override
@@ -62,8 +68,4 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepo.add(author);
     }
 
-    @Override
-    public void deleteBooksWhichOldAndSentReport() {
-
-    }
 }

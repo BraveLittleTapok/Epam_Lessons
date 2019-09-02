@@ -1,12 +1,12 @@
 package ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
 
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.*;
+
 import java.util.List;
 
-public class Book extends Entity {
+public class Book {
 
-  //  protected Long id;
+    protected Long id;
     protected String name;
     protected int publishYear;
     protected int totalPages;

@@ -1,11 +1,13 @@
 package ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.*;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.BaseRepo;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionStorage;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.IdGenerator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 /**
  *
@@ -27,9 +29,8 @@ import java.util.List;
  *
  *
  */
-public class BookRepoCollectionImpl implements BookRepo   {
+public class BookRepoCollectionImpl implements BookRepo, BaseRepo<Book>   {
 
-    final EntityRepo entity = new EntityRepoImpl();
     @Override
     public int count() {
         return CollectionStorage.getTotalBooks();
@@ -37,17 +38,30 @@ public class BookRepoCollectionImpl implements BookRepo   {
 
     @Override
     public void print() {
-        entity.print(CollectionStorage.getAllBooks());
+        for (Object element : CollectionStorage.getAllBooks()) {
+            if (element != null) {
+                System.out.println(element.toString());
+            }
+        }
     }
 
     @Override
     public void delete(Book book) {
-        entity.delete(book, CollectionStorage.getAllBooks());
+        Iterator<Book> iter = CollectionStorage.getAllBooks().iterator();
+        while (iter.hasNext()) {
+            boolean idsMatches = book.getId().equals(iter.next().getId());
+            if (idsMatches) {
+                iter.remove();
+                break;
+            }
+        }
     }
 
     @Override
-    public Long add(Book element) {
-        return entity.add(element, CollectionStorage.getAllBooks());
+    public Long add(Book book) {
+        book.setId(IdGenerator.generateId());
+        CollectionStorage.getAllBooks().add(book);
+        return book.getId();
     }
 
     @Override

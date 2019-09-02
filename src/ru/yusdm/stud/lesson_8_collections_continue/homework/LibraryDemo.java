@@ -42,6 +42,7 @@ public class LibraryDemo {
 
         bookService.print();
         authorService.print();
+
     }
 
     private static void initData(BookService bookService, AuthorService authorService) {

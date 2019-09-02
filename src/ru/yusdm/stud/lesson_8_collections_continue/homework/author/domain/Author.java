@@ -1,13 +1,12 @@
 package ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain;
 
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.*;
 
 import java.util.List;
 
-public class Author extends Entity {
+public class Author {
 
-  //  private Long id;
+    private Long id;
     private String lastName;
     private String name;
     private int yearOfBorn;

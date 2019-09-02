@@ -23,22 +23,6 @@ public final class CollectionStorage {
     }
 
 
-  /*  public static void addBook(Book book) {
-        book.setId(IdGenerator.generateId());
-        books.add(book);
-    }*/
-
-/*    public static void removeBook(Book book) {
-        Iterator<Book> booksIter = books.iterator();
-        while (booksIter.hasNext()) {
-            boolean idsMatches = booksIter.next().getId().equals(book.getId());
-            if (idsMatches) {
-                booksIter.remove();
-                break;
-            }
-        }
-    }*/
-
     //-----------Authors---------------------------------------------------------
     public static List<Author> getAllAuthors() {
         return authors;
@@ -48,25 +32,4 @@ public final class CollectionStorage {
         return authors.size();
     }
 
-   /* public static void addAuthor(Author author) {
-        author.setId(IdGenerator.generateId());
-        authors.add(author);
-    }
-
-  /*  public static void removeAuthor(Author author) {
-        Iterator<Author> authors = CollectionStorage.authors.iterator();
-        while (authors.hasNext()) {
-            boolean idsMatches = authors.next().getId().equals(author.getId());
-            if (idsMatches) {
-                authors.remove();
-                break;
-            }
-        }
-    }*/
-
-   /* public static<T extends Entity> Long add(T element, List<T> listToAdd) {
-        element.setId(IdGenerator.generateId());
-        listToAdd.add(element);
-        return element.getId();
-    }*/
 }

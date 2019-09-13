@@ -1,35 +1,30 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.BaseRepo;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionStorage;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.IdGenerator;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionStorage;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
 /**
- *
  * Java------------
  * List<Book> list
  * 1 - Pushkin = b1;
- *
+ * <p>
  * list.remove(b1);
- *
+ * <p>
  * ---------------
  * Go to file
  * Read 1 - Pushkin = b1; => BookObject = bo
- *
+ * <p>
  * list(bo)
- *
+ * <p>
  * forEach(if ID == bo.id){
- *     remove!!
+ * remove!!
  * }
- *
- *
  */
-public class BookRepoCollectionImpl implements BookRepo, BaseRepo<Book>   {
+public class BookRepoCollectionImpl implements BookRepo {
 
     @Override
     public int count() {
@@ -38,30 +33,38 @@ public class BookRepoCollectionImpl implements BookRepo, BaseRepo<Book>   {
 
     @Override
     public void print() {
-        for (Object element : CollectionStorage.getAllBooks()) {
-            if (element != null) {
-                System.out.println(element.toString());
+        for (Book book : CollectionStorage.getAllBooks()) {
+            if (book != null) {
+                System.out.println(book.toString());
             }
         }
     }
 
     @Override
     public void delete(Book book) {
-        Iterator<Book> iter = CollectionStorage.getAllBooks().iterator();
-        while (iter.hasNext()) {
-            boolean idsMatches = book.getId().equals(iter.next().getId());
-            if (idsMatches) {
-                iter.remove();
-                break;
-            }
-        }
+        CollectionStorage.removeBook(book);
     }
 
     @Override
     public Long add(Book book) {
-        book.setId(IdGenerator.generateId());
-        CollectionStorage.getAllBooks().add(book);
+        CollectionStorage.addBook(book);
         return book.getId();
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return CollectionStorage.getAllBooks();
+    }
+
+    @Override
+    public Book findById(Long bookId) {
+        for (Book book : CollectionStorage.getAllBooks()) {
+            if (book != null && bookId.equals(book.getId())) {
+                return book;
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -75,8 +78,7 @@ public class BookRepoCollectionImpl implements BookRepo, BaseRepo<Book>   {
 
         for (Book b : CollectionStorage.getAllBooks()) {
 
-            List<Author> authors = b.getAuthors();
-            for (Author a : authors) {
+            for (Author a : b.getAuthors()) {
                 if (a != null && authorId == a.getId()) {
                     found.add(b);
                     break;
@@ -87,5 +89,4 @@ public class BookRepoCollectionImpl implements BookRepo, BaseRepo<Book>   {
 
         return found;
     }
-
 }

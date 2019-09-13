@@ -1,4 +1,4 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
 
 public class PrintedBook extends Book {
     private String fontFamily;
@@ -14,7 +14,11 @@ public class PrintedBook extends Book {
     @Override
     public String toString() {
         return "PrintedBook{" +
-                "fontFamily='" + fontFamily + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", publishYear=" + publishYear +
+                ", totalPages=" + totalPages +
+                " fontFamily='" + fontFamily + '\'' +
                 '}';
     }
 }

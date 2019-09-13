@@ -1,12 +1,13 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.author.service;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo.AuthorRepo;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.*;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.BaseRepo;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo.AuthorRepo;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
 
-public class AuthorServiceImpl implements AuthorService, BaseRepo<Author> {
+import java.util.List;
+
+public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepo authorRepo;
     private final BookRepo bookRepo;
@@ -23,14 +24,10 @@ public class AuthorServiceImpl implements AuthorService, BaseRepo<Author> {
     }
 
     @Override
-    public void deleteBooksWhichOldAndSentReport() {
-
-    }
-
-    @Override
     public void print() {
         authorRepo.print();
     }
+
     /**
      * When delete Author
      * <p>
@@ -60,7 +57,6 @@ public class AuthorServiceImpl implements AuthorService, BaseRepo<Author> {
         }
 
         authorRepo.delete(author);
-
     }
 
     @Override
@@ -68,4 +64,22 @@ public class AuthorServiceImpl implements AuthorService, BaseRepo<Author> {
         return authorRepo.add(author);
     }
 
+    @Override
+    public Author findById(Long authorId) {
+        if (authorId != null) {
+            return authorRepo.findById(authorId);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void deleteBooksWhichOldAndSentReport() {
+
+    }
+
+    @Override
+    public List<Author> getAllAuthors() {
+        return authorRepo.getAllAuthors();
+    }
 }

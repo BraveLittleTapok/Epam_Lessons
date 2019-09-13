@@ -1,21 +1,21 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.*;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class BookRepoArrayImpl implements BookRepo, BaseRepo<Book> {
+public class BookRepoArrayImpl implements BookRepo {
 
     @Override
     public int count() {
         return ArrayStorage.getTotalBooks();
     }
 
-   @Override
+    @Override
     public void print() {
         for (Book book : ArrayStorage.getAllBooks()) {
             if (book != null) {
@@ -24,15 +24,26 @@ public class BookRepoArrayImpl implements BookRepo, BaseRepo<Book> {
         }
     }
 
-   @Override
+    @Override
     public void delete(Book book) {
         ArrayStorage.removeBook(book);
     }
 
-   @Override
+    @Override
     public Long add(Book book) {
         ArrayStorage.addBook(book);
         return book.getId();
+    }
+
+    @Override
+    public Book findById(Long bookId) {
+        for (Book book : ArrayStorage.getAllBooks()) {
+            if (book != null && bookId.equals(book.getId())) {
+                return book;
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -56,5 +67,10 @@ public class BookRepoArrayImpl implements BookRepo, BaseRepo<Book> {
         }
 
         return found;
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return new ArrayList<Book>(Arrays.asList(ArrayStorage.getAllBooks()));
     }
 }

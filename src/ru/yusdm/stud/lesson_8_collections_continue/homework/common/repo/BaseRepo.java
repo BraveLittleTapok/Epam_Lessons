@@ -1,11 +1,13 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo;
 
-/**
- * Created by Dinara Shabanova on 02.09.2019.
- */
-public interface BaseRepo<T> {
+public interface BaseRepo<T, ID> {
     int count();
+
     void print();
-    void delete(T element);
-    Long add(T element);
+
+    void delete(T t);
+
+    ID add(T t);
+
+    T findById(ID id);
 }

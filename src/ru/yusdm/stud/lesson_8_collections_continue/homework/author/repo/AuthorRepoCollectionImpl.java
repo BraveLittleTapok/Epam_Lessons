@@ -1,44 +1,49 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.BaseRepo;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionStorage;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.IdGenerator;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionStorage;
 
-import java.util.Iterator;
+import java.util.List;
 
-public class AuthorRepoCollectionImpl implements AuthorRepo, BaseRepo<Author> {
-
+public class AuthorRepoCollectionImpl implements AuthorRepo {
     @Override
     public int count() {
         return CollectionStorage.getTotalAuthors();
     }
 
     @Override
+    public List<Author> getAllAuthors() {
+        return CollectionStorage.getAllAuthors();
+    }
+
+    @Override
     public void print() {
-        for (Object element : CollectionStorage.getAllAuthors()) {
-            if (element != null) {
-                System.out.println(element.toString());
+        for (Author author : CollectionStorage.getAllAuthors()) {
+            if (author != null) {
+                System.out.println(author.toString());
             }
         }
     }
 
     @Override
     public void delete(Author author) {
-        Iterator<Author> iter = CollectionStorage.getAllAuthors().iterator();
-        while (iter.hasNext()) {
-            boolean idsMatches = author.getId().equals(iter.next().getId());
-            if (idsMatches) {
-                iter.remove();
-                break;
-            }
-        }
+        CollectionStorage.removeAuthor(author);
     }
 
     @Override
     public Long add(Author author) {
-        author.setId(IdGenerator.generateId());
-        CollectionStorage.getAllAuthors().add(author);
+        CollectionStorage.addAuthor(author);
         return author.getId();
+    }
+
+    @Override
+    public Author findById(Long authorId) {
+        for (Author author : CollectionStorage.getAllAuthors()) {
+            if (author != null && authorId.equals(author.getId())) {
+                return author;
+            }
+        }
+
+        return null;
     }
 }

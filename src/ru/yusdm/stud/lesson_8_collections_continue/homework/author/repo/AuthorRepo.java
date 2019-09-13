@@ -1,10 +1,10 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.*;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.*;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo;
 
-public interface AuthorRepo extends BaseRepo<Author>{
-    int count();
-  /*  void print();
-    void delete(Author author);
-    Long add(Author author);*/
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.BaseRepo;
+
+import java.util.List;
+
+public interface AuthorRepo extends BaseRepo<Author, Long> {
+    public List<Author> getAllAuthors();
 }

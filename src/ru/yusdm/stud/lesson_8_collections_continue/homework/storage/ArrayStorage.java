@@ -1,7 +1,8 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.storage;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.storage;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.ArrayUtils;
 
 public final class ArrayStorage {
     private static final int CAPACITY = 10;
@@ -11,7 +12,6 @@ public final class ArrayStorage {
 
     private static Author[] authors = new Author[CAPACITY];
     private static int authorIndex = 0;
-
 
     private ArrayStorage() {
     }
@@ -37,11 +37,7 @@ public final class ArrayStorage {
 
     private static void increaseBooksStorage() {
         Book[] books = new Book[authorIndex + CAPACITY];
-
-        for (int i = 0; i < books.length; i++) {
-            books[i] = ArrayStorage.books[i];
-        }
-
+        ArrayUtils.copyElements(ArrayStorage.books, books);
         ArrayStorage.books = books;
     }
 
@@ -69,13 +65,7 @@ public final class ArrayStorage {
          */
 
         Book[] newBooks = new Book[books.length];
-        int index = 0;
-        for (Book b : books) {
-            if (b != null) {
-                newBooks[index] = b;
-                index++;
-            }
-        }
+        ArrayUtils.copyNotNullElements(books, newBooks);
 
         /**
          *  [0] = A
@@ -110,11 +100,7 @@ public final class ArrayStorage {
 
     private static void increaseAuthorsStorage() {
         Author[] authors = new Author[authorIndex + CAPACITY];
-
-        for (int i = 0; i < authors.length; i++) {
-            authors[i] = ArrayStorage.authors[i];
-        }
-
+        ArrayUtils.copyElements(ArrayStorage.authors, authors);
         ArrayStorage.authors = authors;
     }
 
@@ -140,15 +126,8 @@ public final class ArrayStorage {
          *  [2] = C
          *  [3] = NULL
          */
-
         Author[] newAuthors = new Author[ArrayStorage.authors.length];
-        int index = 0;
-        for (Author a : authors) {
-            if (a != null) {
-                newAuthors[index] = a;
-                index++;
-            }
-        }
+        ArrayUtils.copyNotNullElements(authors, newAuthors);
 
         /**
          *  [0] = A

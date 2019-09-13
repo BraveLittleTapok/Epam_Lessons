@@ -1,12 +1,11 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.author.service;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.common.repo.*;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.*;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.service.BaseService;
 
-public interface AuthorService extends BaseRepo<Author> {
-    int count();
-   /* void print();
-    void delete(Author author);
-    Long add(Author author);*/
+import java.util.List;
+
+public interface AuthorService extends BaseService<Author, Long> {
     void deleteBooksWhichOldAndSentReport();
+    List<Author> getAllAuthors();
 }

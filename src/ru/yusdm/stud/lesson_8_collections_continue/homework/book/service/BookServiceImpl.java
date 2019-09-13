@@ -1,13 +1,18 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.book.service;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.service;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
 
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
 
     private final BookRepo bookRepo;
+
+    @Override
+    public List<Book> getAllBooks() {
+        return bookRepo.getAllBooks();
+    }
 
     public BookServiceImpl(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
@@ -31,6 +36,15 @@ public class BookServiceImpl implements BookService {
     @Override
     public Long add(Book book) {
         return bookRepo.add(book);
+    }
+
+    @Override
+    public Book findById(Long bookId) {
+        if (bookId != null) {
+            return bookRepo.findById(bookId);
+        } else {
+            return null;
+        }
     }
 
     @Override

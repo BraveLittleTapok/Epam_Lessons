@@ -1,4 +1,6 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.book;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.book;
+
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.BookGenre;
 
 public class InputBook {
 
@@ -8,6 +10,8 @@ public class InputBook {
 
     private String paint;
     private String fontFamily;
+    private BookGenre bookType;
+    private String bookFamily;
 
     public String getName() {
         return name;
@@ -47,5 +51,21 @@ public class InputBook {
 
     public void setFontFamily(String fontFamily) {
         this.fontFamily = fontFamily;
+    }
+
+    public BookGenre getBookGenre() {
+        return bookType;
+    }
+
+    public void setBookGenre(BookGenre bookType) {
+        this.bookType = bookType;
+    }
+
+    public String getBookFamily() {
+        return bookFamily;
+    }
+
+    public void setBookFamily(String bookFamily) {
+        this.bookFamily = bookFamily;
     }
 }

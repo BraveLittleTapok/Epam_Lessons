@@ -1,4 +1,4 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.storage;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.storage;
 
 public final class IdGenerator {
     public static long id = 1;

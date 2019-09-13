@@ -1,4 +1,4 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
 
 public class HandWrittenBook extends Book {
     private String paint;

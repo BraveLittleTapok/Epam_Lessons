@@ -1,26 +1,18 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.domain.BaseDomain;
 
 import java.util.List;
 
-public class Author {
+public class Author extends BaseDomain<Long> {
 
-    private Long id;
     private String lastName;
     private String name;
     private int yearOfBorn;
     private List<Book> books;
 
     public Author(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
         this.id = id;
     }
 

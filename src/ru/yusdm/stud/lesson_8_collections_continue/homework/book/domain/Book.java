@@ -1,32 +1,23 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.domain.BaseDomain;
 
 import java.util.List;
 
-public class Book {
-
-    protected Long id;
+public class Book extends BaseDomain<Long> {
     protected String name;
     protected int publishYear;
     protected int totalPages;
     protected List<Author> authors;
-    protected BookType bookType;
+    protected BookGenre bookType;
 
-    public BookType getBookType() {
+    public BookGenre getBookGenre() {
         return bookType;
     }
 
-    public void setBookType(BookType bookType) {
+    public void setBookGenre(BookGenre bookType) {
         this.bookType = bookType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -1,4 +1,4 @@
-package ru.yusdm.stud.lesson_8_collections_continue.homework.author;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.author;
 
 public class InputAuthor {
     private String lastName;

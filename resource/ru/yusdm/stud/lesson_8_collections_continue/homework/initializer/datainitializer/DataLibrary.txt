@@ -1,0 +1,6 @@
+/* Author name lastname | Date of birth | Name of BOOK | publishYear | totalPages | BookGenre | BookType|  */
+William Shakespeare | 1564 | The Tragedy of King Lear | 1605 | 200 | NOVEL  | Printed|
+William Shakespeare | 1564 | Hamlet | 1600 | 500 | NOVEL1  | Hand|
+Ivan Ivanov | 1990 | Mir | 2002 | 250 | SCIENCE | Printed|
+Petr Petrenov | 1895 | Mir | 2002 | 250 |  SCIENCE |Printed|
+Denis Osipov | 1895 | Osina | 2002 | 250 |  SCIENCE | |

@@ -1,0 +1,35 @@
+<authors>
+    <author>
+        <name>Alexandr</name>
+        <lastName>Pushkin</lastName>
+        <yearOfBirth>1799</yearOfBirth>
+        <books>
+            <book>
+                <name>Ruslan and Ludmila</name>
+                <publishYear>2000</publishYear>
+                <totalPages>200</totalPages>
+                <genre>NOVEL</genre>
+            </book>
+            <book type = "hand">
+                <name>Gold fish</name>
+                <publishYear>2000</publishYear>
+                <totalPages>10</totalPages>
+                <genre>NOVEL</genre>
+            </book>
+        </books>
+    </author>
+    <author>
+        <name>William</name>
+        <lastName>Shakespear</lastName>
+        <yearOfBirth>1564</yearOfBirth>
+        <books>
+            <book type = "printed">
+                <name>Romeo and Juliet</name>
+                <publishYear>1995</publishYear>
+                <totalPages>300</totalPages>
+                <genre>NOVEL</genre>
+            </book>
+        </books>
+    </author>
+
+</authors>

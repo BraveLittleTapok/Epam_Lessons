@@ -1,7 +1,6 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.datainitializer;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.serviceinitializer.ServicesHolder;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.*;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 /**
  * Created by Dinara Shabanova on 12.09.2019.
  */
@@ -17,6 +16,9 @@ public final class DataInitializerFactory {
             }
             case FROM_TXT_FILE: {
                 return new FileInitializer(servicesHolder);
+            }
+            case FROM_XML: {
+                return new XmlInitializer(servicesHolder);
             }
             default: {
                 throw new RuntimeException("Unknown initializer for '" + dataInitializerType + "'");

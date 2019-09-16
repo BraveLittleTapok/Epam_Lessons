@@ -1,4 +1,4 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.serviceinitializer;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer;
 
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo.AuthorRepo;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo.AuthorRepoArrayImpl;

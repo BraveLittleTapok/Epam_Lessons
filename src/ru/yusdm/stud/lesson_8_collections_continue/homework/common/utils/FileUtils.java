@@ -16,7 +16,6 @@ public class FileUtils {
     private FileUtils(){
 
     }
-
     public static File createFileFromResource(String fileNamePrefix , String fileNameSuffix, String resourcePath) throws IOException {
         try(InputStream inputStream = File.class.getResourceAsStream(resourcePath)) {
             Path tempFile = Files.createTempFile(fileNamePrefix, fileNameSuffix);

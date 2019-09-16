@@ -1,9 +1,10 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.datainitializer;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.BookGenre;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.BadBookTypeException;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.author.InputAuthor;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.book.InputBook;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomExceptions;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class ParseString {
         return inputAuthor;
     }
 
-    static InputBook getParseInputBook(List<String> listOfStrings) throws Exception {
+    static InputBook getParseInputBook(List<String> listOfStrings) throws CustomExceptions {
         InputBook inputBook = new InputBook();
         inputBook.setName(listOfStrings.get(2));
         String strTrim = listOfStrings.get(3).trim();
@@ -36,14 +37,15 @@ public class ParseString {
             strTrim = listOfStrings.get(5).trim();
             if (BookGenre.hasValue(strTrim)) {
                 inputBook.setBookGenre(BookGenre.setBookGenre(strTrim));
+                return inputBook;
             } else {
                 throw new BadBookTypeException("Bad Genre of the Book", inputBook.getName());
             }
         } catch (BadBookTypeException e) {
             System.out.print(e.getMessage() + ": ");
             System.out.println(e.getNameOfBook());
-        } finally {
             return inputBook;
+          //  return null;
         }
     }
 

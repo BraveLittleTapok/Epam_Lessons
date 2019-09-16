@@ -1,4 +1,4 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.book;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book;
 
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.BookGenre;
 

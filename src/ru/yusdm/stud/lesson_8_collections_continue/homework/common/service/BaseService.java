@@ -6,5 +6,6 @@ public interface BaseService<T, ID> {
     void delete(T t);
     ID add(T t);
     T findById(ID id);
+    //void exportLibraryToFile(String path);
 
 }

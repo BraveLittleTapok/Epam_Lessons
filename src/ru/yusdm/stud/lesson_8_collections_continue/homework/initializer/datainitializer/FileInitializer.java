@@ -1,11 +1,11 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.datainitializer;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.FileUtils;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.BadBookTypeException;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.book.InputBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.serviceinitializer.ServicesHolder;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomExceptions;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -19,13 +19,13 @@ import static src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.ut
 
 /**
  * Created by Dinara Shabanova on 12.09.2019.
- *  type of file
+ * type of file
  * /* Author name lastname | Date of birth | Name of BOOK | publishYear | totalPages | BookGenre | BookType|
- *      [0]                     [1]             [2]             [3]         [4]         [5]            [7]   => size = 7
+ * [0]                     [1]             [2]             [3]         [4]         [5]            [7]   => size = 7
  */
 public class FileInitializer extends BasicDataInitializer {
 
-    private static final String PATH = "/resource/ru/yusdm/stud/lesson_8_collections_continue/homework/initializer/datainitializer/DataLibrary.txt";
+    private static final String PATH = "/resource/ru/yusdm/stud/lesson_8_collections_continue/homework/DataLibrary.txt";
 
     public FileInitializer(ServicesHolder servicesHolder) {
         super(servicesHolder);
@@ -54,8 +54,9 @@ public class FileInitializer extends BasicDataInitializer {
                         } else {
                             checkAndAddEntity(newAuthor, newBook);
                         }
-                    }catch (BadBookTypeException e){
-                        System.out.println("Book was not add");
+                    } catch (CustomExceptions e) {
+                        System.out.println("Abort");
+                        break;
                     }
                 } else {
                     System.out.println("Something went wrong");
@@ -122,13 +123,7 @@ public class FileInitializer extends BasicDataInitializer {
     }
 
     private Book valueOfInputBook(InputBook inputBook) throws Exception {
-        if ("Printed".equals(inputBook.getBookFamily())) {
-            return valueOfInputPrintedBook(inputBook);
-        } else if ("Hand".equals(inputBook.getBookFamily())) {
-            return valueOfInputHandWrittenBook(inputBook);
-        } else {
-            return valueOfBook(inputBook);
-        }
+        return valueOfBook(inputBook.getBookFamily(), inputBook);
     }
 
 }

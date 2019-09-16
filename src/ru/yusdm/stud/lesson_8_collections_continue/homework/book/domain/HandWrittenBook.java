@@ -10,4 +10,13 @@ public class HandWrittenBook extends Book {
     public void setPaint(String paint) {
         this.paint = paint;
     }
+
+    @Override
+    public String toString() {
+        return "HandWrittenBook{" +
+                "paint='" + paint +
+                ", name='" + name + '\'' +
+                ", publishYear=" + publishYear +
+                ", totalPages=" + totalPages ;
+    }
 }

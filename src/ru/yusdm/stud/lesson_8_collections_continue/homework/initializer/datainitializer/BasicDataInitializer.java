@@ -1,17 +1,15 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.datainitializer;
+package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.HandWrittenBook;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.PrintedBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.author.InputAuthor;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.book.InputBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.intializer.serviceinitializer.ServicesHolder;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 /**
  * Created by Dinara Shabanova on 12.09.2019.
  */
-public abstract class BasicDataInitializer {
+public abstract class BasicDataInitializer implements BasicDataInit {
     protected final ServicesHolder servicesHolder;
 
     protected BasicDataInitializer(ServicesHolder servicesHolder) {
@@ -38,23 +36,38 @@ public abstract class BasicDataInitializer {
         book.setBookGenre(inputBook.getBookGenre());
         return book;
     }
-
-
-    protected Book valueOfBook(InputBook inputBook) {
-        Book book = new Book();
-        book.setName(inputBook.getName());
-        book.setPublishYear(inputBook.getPublishYear());
-        book.setBookGenre(inputBook.getBookGenre());
+/*
+    @Override
+    public Book valueOfBook(String type, InputBook inputBook) throws CustomExceptions {
+        Book book = null;
+        try {
+            if ("printed".equalsIgnoreCase(type)) {
+                book = new PrintedBook();
+            } else if ("hand".equalsIgnoreCase(type)) {
+                book = new HandWrittenBook();
+            } else if (type == null) {
+                book = new Book();
+            } else {
+                throw new CustomExceptions("Unknown type of book");
+            }
+            book.setName(inputBook.getName());
+            book.setPublishYear(inputBook.getPublishYear());
+            book.setBookGenre(inputBook.getBookGenre());
+        } catch (CustomExceptions e) {
+            System.out.println(e.getMessage());
+        }
         return book;
-    }
-    protected Author valueOfInputAuthor(InputAuthor inputAuthor) {
+    }*/
+
+  /*  @Override
+    public Author valueOfInputAuthor(InputAuthor inputAuthor) {
         Author author = new Author(null);
         author.setLastName(inputAuthor.getLastName());
         author.setName(inputAuthor.getName());
         author.setYearOfBorn(inputAuthor.getYearOfBorn());
 
         return author;
-    }
+    }*/
 
   /*  protected Map<String, Author> valueOfInputAuthors(Collection<InputAuthor> parsedAuthors) {
         Map<String, Author> result = new LinkedHashMap<>();

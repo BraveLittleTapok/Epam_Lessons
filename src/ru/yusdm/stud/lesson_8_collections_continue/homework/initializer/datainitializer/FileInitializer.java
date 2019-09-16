@@ -39,14 +39,13 @@ public class FileInitializer extends BasicDataInitializer {
 
     }
 
-    private void parseFile(List<String> stringsFromFile) throws Exception {
+    private void parseFile(List<String> stringsFromFile) throws CustomExceptions {
         for (String str : stringsFromFile) {
             if (!str.contains("/*")) {
                 //Split by |
                 List<String> listOfStrings = new ArrayList<>(Arrays.asList(str.split("\\|")));
                 deleteSplittedCharacter(listOfStrings);
                 if (listOfStrings.size() == 7) {
-                    try {
                         Author newAuthor = valueOfInputAuthor(ParseString.getParseInputAuthor(listOfStrings));
                         Book newBook = valueOfInputBook(ParseString.getParseInputBook(listOfStrings));
                         if (this.servicesHolder.getAuthorService().count() == 0) {
@@ -54,10 +53,6 @@ public class FileInitializer extends BasicDataInitializer {
                         } else {
                             checkAndAddEntity(newAuthor, newBook);
                         }
-                    } catch (CustomExceptions e) {
-                        System.out.println("Abort");
-                        break;
-                    }
                 } else {
                     System.out.println("Something went wrong");
                     break;
@@ -122,7 +117,7 @@ public class FileInitializer extends BasicDataInitializer {
         this.servicesHolder.getAuthorService().add(author);
     }
 
-    private Book valueOfInputBook(InputBook inputBook) throws Exception {
+    private Book valueOfInputBook(InputBook inputBook) throws CustomExceptions {
         return valueOfBook(inputBook.getBookFamily(), inputBook);
     }
 

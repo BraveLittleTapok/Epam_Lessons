@@ -3,6 +3,7 @@ package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.dat
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.FileUtils;
+import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.BadBookTypeException;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomExceptions;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
@@ -46,13 +47,14 @@ public class FileInitializer extends BasicDataInitializer {
                 List<String> listOfStrings = new ArrayList<>(Arrays.asList(str.split("\\|")));
                 deleteSplittedCharacter(listOfStrings);
                 if (listOfStrings.size() == 7) {
-                        Author newAuthor = valueOfInputAuthor(ParseString.getParseInputAuthor(listOfStrings));
-                        Book newBook = valueOfInputBook(ParseString.getParseInputBook(listOfStrings));
-                        if (this.servicesHolder.getAuthorService().count() == 0) {
-                            addBookAndAuthorInStorage(newBook, newAuthor);
-                        } else {
-                            checkAndAddEntity(newAuthor, newBook);
-                        }
+                    Author newAuthor = valueOfInputAuthor(ParseString.getParseInputAuthor(listOfStrings));
+                    Book newBook = valueOfInputBook(ParseString.getParseInputBook(listOfStrings));
+                    if (this.servicesHolder.getAuthorService().count() == 0) {
+                        addBookAndAuthorInStorage(newBook, newAuthor);
+                    } else {
+                        checkAndAddEntity(newAuthor, newBook);
+                    }
+
                 } else {
                     System.out.println("Something went wrong");
                     break;

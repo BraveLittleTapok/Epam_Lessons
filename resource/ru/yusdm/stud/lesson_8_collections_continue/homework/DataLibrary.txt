@@ -1,4 +1,4 @@
  * /* Author name lastname | Date of birth | Name of BOOK | publishYear | totalPages | BookGenre | BookType| *
-Alexandr Pushkin | 1799 | ruslan and ludmila| 2000| 200| NOVEL | Hand |
+Alexandr Pushkin | 1799 | ruslan and ludmila| 2000| 200| NOVEL1 | Hand |
 Roman Smirnov | 1899 | Book | 2000 | 200| SCIENCE | Print |
 Roman Smirnov | 1899 | Second book | 2005 | 250 | NOVEL | |

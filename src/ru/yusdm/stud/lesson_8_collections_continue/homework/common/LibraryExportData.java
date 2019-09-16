@@ -3,7 +3,6 @@ package src.ru.yusdm.stud.lesson_8_collections_continue.homework.common;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
 import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 import java.io.FileOutputStream;
@@ -16,7 +15,6 @@ public class LibraryExportData {
 
     public void exportAll(String path, ServicesHolder servicesHolder) {
         try (PrintWriter writer = new PrintWriter(new FileOutputStream(path))) {
-            BookService bookService = servicesHolder.getBookService();
             AuthorService authorService = servicesHolder.getAuthorService();
             for (Author author : authorService.getAllAuthors()) {
                 StringBuilder string = new StringBuilder();

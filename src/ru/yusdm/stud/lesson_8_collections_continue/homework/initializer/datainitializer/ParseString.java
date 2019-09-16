@@ -33,7 +33,6 @@ public class ParseString {
         strTrim = listOfStrings.get(4).trim();
         inputBook.setTotalPages(Integer.parseInt(strTrim));
         inputBook.setBookFamily(getParseBookFamily(listOfStrings.get(6)));
-        try {
             strTrim = listOfStrings.get(5).trim();
             if (BookGenre.hasValue(strTrim)) {
                 inputBook.setBookGenre(BookGenre.setBookGenre(strTrim));
@@ -41,12 +40,6 @@ public class ParseString {
             } else {
                 throw new BadBookTypeException("Bad Genre of the Book", inputBook.getName());
             }
-        } catch (BadBookTypeException e) {
-            System.out.print(e.getMessage() + ": ");
-            System.out.println(e.getNameOfBook());
-            return inputBook;
-          //  return null;
-        }
     }
 
     private static String getParseBookFamily(String s) {

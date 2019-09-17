@@ -29,8 +29,8 @@ public class XmlInitializer extends BasicDataInitializer {
     public void initData() throws Exception {
         File xmlFile = FileUtils.createFileFromResource("xml", "33", PATH);
         if (isFileValid(xmlFile)) {
-            ParseFromXML handler = new ParseFromXML(xmlFile, dataInitializerType);
-            addToLibrary(handler.getAuthorsWithBooks());
+            ParseFromXML parse = new ParseFromXML(xmlFile, dataInitializerType);
+            addToLibrary(parse.getAuthorsWithBooks());
         } else {
             throw new IllegalArgumentException("Bad file");
         }

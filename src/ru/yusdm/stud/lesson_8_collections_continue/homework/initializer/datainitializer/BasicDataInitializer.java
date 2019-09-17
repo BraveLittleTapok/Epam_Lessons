@@ -1,12 +1,15 @@
 package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.*;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.HandWrittenBook;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.PrintedBook;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomException;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.*;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
-import ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.*;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.*;
+import java.util.List;
 
 /**
  * Created by Dinara Shabanova on 12.09.2019.
@@ -39,14 +42,21 @@ public abstract class BasicDataInitializer {
         return book;
     }
 
-    public static Book valueOfBook(String type, InputBook inputBook) throws CustomException {
+    protected static void updateListOfAuthorsForBook(Book bookAlreadyExist, Author newAuthor) {
+        List<Author> authorsBookAlreadyHas = bookAlreadyExist.getAuthors();
+        authorsBookAlreadyHas.add(newAuthor);
+        bookAlreadyExist.setAuthors(authorsBookAlreadyHas);
+    }
+
+    protected static Book valueOfBook(String type, InputBook inputBook) throws CustomException {
         Book book = null;
         try {
-            if ("printed".equalsIgnoreCase(type)) {
+            String trimType = type.trim();
+            if ("printed".equalsIgnoreCase(trimType)) {
                 book = new PrintedBook();
-            } else if ("hand".equalsIgnoreCase(type)) {
+            } else if ("hand".equalsIgnoreCase(trimType)) {
                 book = new HandWrittenBook();
-            } else if (type == null) {
+            } else if (type == null || stringIsEmpty(trimType)) {
                 book = new Book();
             } else {
                 throw new CustomException("Unknown type of book");
@@ -60,7 +70,7 @@ public abstract class BasicDataInitializer {
         return book;
     }
 
-    public static Author valueOfInputAuthor(InputAuthor inputAuthor) {
+    protected static Author valueOfInputAuthor(InputAuthor inputAuthor) {
         Author author = new Author(null);
         author.setLastName(inputAuthor.getLastName());
         author.setName(inputAuthor.getName());
@@ -69,12 +79,9 @@ public abstract class BasicDataInitializer {
         return author;
     }
 
-  /*  protected Map<String, Author> valueOfInputAuthors(Collection<InputAuthor> parsedAuthors) {
-        Map<String, Author> result = new LinkedHashMap<>();
-        for (InputAuthor parsedAuthor : parsedAuthors) {
-            result.put(parsedAuthor.get, valueOfInputAuthor(parsedAuthor));
-        }
-        return result;
-    }*/
+    private static boolean stringIsEmpty(String str){
+        String returnString = str.replace(" ", "");
+        return returnString.length() == 0 ? true : false;
+    }
 
 }

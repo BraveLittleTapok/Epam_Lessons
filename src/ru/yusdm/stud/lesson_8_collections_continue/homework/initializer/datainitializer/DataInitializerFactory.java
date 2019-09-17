@@ -17,8 +17,9 @@ public final class DataInitializerFactory {
             case FROM_TXT_FILE: {
                 return new FileInitializer(servicesHolder);
             }
-            case FROM_XML: {
-                return new XmlInitializer(servicesHolder);
+            case FROM_XML_SAX_PARSER:
+            case FROM_XML_DOM_PARSER:{
+                return new XmlInitializer(servicesHolder, dataInitializerType);
             }
             default: {
                 throw new RuntimeException("Unknown initializer for '" + dataInitializerType + "'");

@@ -4,5 +4,5 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.dataini
  * Created by Dinara Shabanova on 12.09.2019.
  */
 public enum DataInitializerType {
-    IN_MEMORY, FROM_TXT_FILE, FROM_XML
+    IN_MEMORY, FROM_TXT_FILE, FROM_XML_SAX_PARSER, FROM_XML_DOM_PARSER
 }

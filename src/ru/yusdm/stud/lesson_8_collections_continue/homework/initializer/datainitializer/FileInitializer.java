@@ -75,6 +75,7 @@ public class FileInitializer extends BasicDataInitializer {
             for (Book bookAlreadyExist : this.servicesHolder.getBookService().getAllBooks()) {
                 if (newBook.getName().equals(bookAlreadyExist.getName())) {
                     updateListOfAuthorsForBook(bookAlreadyExist, newAuthor);
+                    newAuthor.setBooks(mutableListOf(bookAlreadyExist));
                     this.servicesHolder.getAuthorService().add(newAuthor);
                     newBookAddedInLibrary = true;
                 }
@@ -83,14 +84,6 @@ public class FileInitializer extends BasicDataInitializer {
                 addBookAndAuthorInStorage(newBook, newAuthor);
             }
         }
-    }
-
-
-    private void updateListOfAuthorsForBook(Book bookAlreadyExist, Author newAuthor) {
-        List<Author> authorsAlreadyAddInAuthor = bookAlreadyExist.getAuthors();
-        authorsAlreadyAddInAuthor.add(newAuthor);
-        bookAlreadyExist.setAuthors(authorsAlreadyAddInAuthor);
-        newAuthor.setBooks(mutableListOf(bookAlreadyExist));
     }
 
     private void updateListOfBooksForAuthor(Author authorAlreadyExist, Book book) {

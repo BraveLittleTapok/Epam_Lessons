@@ -4,38 +4,28 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.BookGenre;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomException;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
-import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.CollectionUtils.mutableListOf;
-
 /**
  * Created by Dinara Shabanova on 16.09.2019.
  */
 public class SAXEventHandler extends DefaultHandler {
-    public ServicesHolder servicesHolder;
-    private BookService bookService;
-    private AuthorService authorService;
     private Stack<String> stackOfTagsName = new Stack<>();
     private InputAuthor inputAuthor;
     private InputBook inputBook;
     private List<Book> books;
+    private List<Author> authors = new ArrayList();
     private StringBuilder stringBuilder = new StringBuilder();
 
-    public SAXEventHandler(ServicesHolder servicesHolder) {
-        authorService = servicesHolder.getAuthorService();
-        this.bookService = servicesHolder.getBookService();
-        this.servicesHolder = servicesHolder;
+    public SAXEventHandler() {
     }
 
     @Override
@@ -63,11 +53,7 @@ public class SAXEventHandler extends DefaultHandler {
             case "author":
                 Author author = BasicDataInitializer.valueOfInputAuthor(inputAuthor);
                 author.setBooks(books);
-                authorService.add(author);
-                for (Book book : books) {
-                    book.setAuthors(mutableListOf(author));
-                    bookService.add(book);
-                }
+                authors.add(author);
                 break;
             case "name":
                 if (stackOfTagsName.peek().equalsIgnoreCase("author")) {
@@ -115,4 +101,7 @@ public class SAXEventHandler extends DefaultHandler {
         stringBuilder.append(data.trim());
     }
 
+   public List<Author> getAuthors (){
+        return authors;
+   }
 }

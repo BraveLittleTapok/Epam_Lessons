@@ -9,7 +9,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.servicei
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType;
 
-import static ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType.FROM_TXT_FILE;
+import static ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType.*;
 import static ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType.COLLECTION;
 
 public class LibraryDemo {
@@ -17,7 +17,7 @@ public class LibraryDemo {
     public static void main(String[] args) throws Exception {
         try {
             StorageType storageType = COLLECTION;
-            DataInitializerType dataInitializerType = FROM_TXT_FILE;
+            DataInitializerType dataInitializerType = FROM_XML_DOM_PARSER;
 
             ServicesHolder servicesHolder = new ServiceInitializer().initServices(storageType);
             BasicDataInitializer dataInitializer = DataInitializerFactory.getDataInititalizer(dataInitializerType, servicesHolder);

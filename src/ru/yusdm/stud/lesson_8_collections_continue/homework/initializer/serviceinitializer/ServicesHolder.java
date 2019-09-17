@@ -1,7 +1,7 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
 
 /**
  * Created by Dinara Shabanova on 12.09.2019.

@@ -1,7 +1,7 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.FileUtils;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.FileUtils;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -10,9 +10,9 @@ import java.io.File;
 /**
  * Created by Тапок on 15.09.2019.
  */
-public class XmlInitializer extends BasicDataInitializer implements BasicDataInit {
+public class XmlInitializer extends BasicDataInitializer {
     private static final String PATH =
-            "/resource/ru/yusdm/stud/lesson_8_collections_continue/homework/initializer/datainitializer/DataOfLibrary.xml";
+            "/ru/yusdm/stud/lesson_8_collections_continue/homework/initializer/datainitializer/DataOfLibrary.xml";
 
     public XmlInitializer(ServicesHolder servicesHolder) {
         super(servicesHolder);

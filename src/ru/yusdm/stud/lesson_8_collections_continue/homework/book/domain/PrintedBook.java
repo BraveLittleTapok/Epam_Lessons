@@ -1,4 +1,4 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
 
 public class PrintedBook extends Book {
     private String fontFamily;

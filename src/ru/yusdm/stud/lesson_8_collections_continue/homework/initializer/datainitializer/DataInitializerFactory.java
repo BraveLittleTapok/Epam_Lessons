@@ -1,6 +1,6 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 /**
  * Created by Dinara Shabanova on 12.09.2019.
  */

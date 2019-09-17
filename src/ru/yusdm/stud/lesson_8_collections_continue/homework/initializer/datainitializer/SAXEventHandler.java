@@ -1,28 +1,28 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.BookGenre;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomExceptions;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.BookGenre;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomException;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.CollectionUtils.mutableListOf;
+import static ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.CollectionUtils.mutableListOf;
 
 /**
  * Created by Dinara Shabanova on 16.09.2019.
  */
-public class SAXEventHandler extends DefaultHandler implements BasicDataInit {
+public class SAXEventHandler extends DefaultHandler {
     public ServicesHolder servicesHolder;
     private BookService bookService;
     private AuthorService authorService;
@@ -61,18 +61,18 @@ public class SAXEventHandler extends DefaultHandler implements BasicDataInit {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         switch (qName) {
             case "author":
-                Author author = valueOfInputAuthor(inputAuthor);
+                Author author = BasicDataInitializer.valueOfInputAuthor(inputAuthor);
                 author.setBooks(books);
                 authorService.add(author);
-                for (Book book: books) {
+                for (Book book : books) {
                     book.setAuthors(mutableListOf(author));
                     bookService.add(book);
                 }
                 break;
             case "name":
-                if (stackOfTagsName.peek().equalsIgnoreCase("author")){
+                if (stackOfTagsName.peek().equalsIgnoreCase("author")) {
                     inputAuthor.setName(stringBuilder.toString());
-                }else if (stackOfTagsName.peek().equalsIgnoreCase("book")){
+                } else if (stackOfTagsName.peek().equalsIgnoreCase("book")) {
                     inputBook.setName(stringBuilder.toString());
                 }
                 break;
@@ -92,15 +92,15 @@ public class SAXEventHandler extends DefaultHandler implements BasicDataInit {
                 if (BookGenre.hasValue(stringBuilder.toString())) {
                     inputBook.setBookGenre(BookGenre.setBookGenre(stringBuilder.toString()));
                 } else {
-                    inputBook.setBookGenre(null);
+                    throw new SAXException("Bad genre for book " + inputBook.getName() + " in xml file");
                 }
                 break;
             case "book":
                 stackOfTagsName.pop();
                 try {
-                    Book book = valueOfBook(inputBook.getBookFamily(), inputBook);
+                    Book book = BasicDataInitializer.valueOfBook(inputBook.getBookFamily(), inputBook);
                     books.add(book);
-                }catch (CustomExceptions e){
+                } catch (CustomException e) {
                     System.out.println(e.getMessage());
                     break;
                 }

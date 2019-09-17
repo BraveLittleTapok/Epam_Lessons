@@ -1,9 +1,9 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.common;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.common;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 import java.io.FileOutputStream;
 import java.io.PrintWriter;

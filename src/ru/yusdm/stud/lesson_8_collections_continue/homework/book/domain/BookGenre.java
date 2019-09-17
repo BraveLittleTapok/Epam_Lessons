@@ -1,4 +1,4 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain;
 
 import java.util.HashMap;
 import java.util.Map;

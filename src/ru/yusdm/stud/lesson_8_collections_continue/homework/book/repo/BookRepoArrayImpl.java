@@ -1,8 +1,8 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;

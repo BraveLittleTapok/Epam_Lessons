@@ -1,13 +1,13 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.CollectionUtils;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.CollectionUtils;
 /**
  * Created by Dinara Shabanova on 12.09.2019.
  */

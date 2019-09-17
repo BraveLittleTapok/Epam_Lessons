@@ -1,15 +1,17 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.HandWrittenBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.PrintedBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.*;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.*;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+
+import ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.*;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.*;
 
 /**
  * Created by Dinara Shabanova on 12.09.2019.
  */
-public abstract class BasicDataInitializer implements BasicDataInit {
+public abstract class BasicDataInitializer {
     protected final ServicesHolder servicesHolder;
 
     protected BasicDataInitializer(ServicesHolder servicesHolder) {
@@ -36,9 +38,8 @@ public abstract class BasicDataInitializer implements BasicDataInit {
         book.setBookGenre(inputBook.getBookGenre());
         return book;
     }
-/*
-    @Override
-    public Book valueOfBook(String type, InputBook inputBook) throws CustomExceptions {
+
+    public static Book valueOfBook(String type, InputBook inputBook) throws CustomException {
         Book book = null;
         try {
             if ("printed".equalsIgnoreCase(type)) {
@@ -48,26 +49,25 @@ public abstract class BasicDataInitializer implements BasicDataInit {
             } else if (type == null) {
                 book = new Book();
             } else {
-                throw new CustomExceptions("Unknown type of book");
+                throw new CustomException("Unknown type of book");
             }
             book.setName(inputBook.getName());
             book.setPublishYear(inputBook.getPublishYear());
             book.setBookGenre(inputBook.getBookGenre());
-        } catch (CustomExceptions e) {
+        } catch (CustomException e) {
             System.out.println(e.getMessage());
         }
         return book;
-    }*/
+    }
 
-  /*  @Override
-    public Author valueOfInputAuthor(InputAuthor inputAuthor) {
+    public static Author valueOfInputAuthor(InputAuthor inputAuthor) {
         Author author = new Author(null);
         author.setLastName(inputAuthor.getLastName());
         author.setName(inputAuthor.getName());
         author.setYearOfBorn(inputAuthor.getYearOfBorn());
 
         return author;
-    }*/
+    }
 
   /*  protected Map<String, Author> valueOfInputAuthors(Collection<InputAuthor> parsedAuthors) {
         Map<String, Author> result = new LinkedHashMap<>();

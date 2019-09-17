@@ -1,7 +1,7 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.author.service;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.service.BaseService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.common.service.BaseService;
 
 import java.util.List;
 

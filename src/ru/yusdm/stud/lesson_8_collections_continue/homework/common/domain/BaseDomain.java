@@ -1,4 +1,4 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.domain;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.common.domain;
 
 public class BaseDomain<ID> {
     protected ID id;

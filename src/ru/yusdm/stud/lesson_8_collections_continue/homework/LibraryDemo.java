@@ -1,19 +1,16 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework;
+package ru.yusdm.stud.lesson_8_collections_continue.homework;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.LibraryExportData;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.BadBookTypeException;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.BasicDataInitializer;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerFactory;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServiceInitializer;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.BasicDataInitializer;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerFactory;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServiceInitializer;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType;
 
-import static src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType.FROM_TXT_FILE;
-import static src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType.FROM_XML;
-import static src.ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType.COLLECTION;
+import static ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType.FROM_TXT_FILE;
+import static ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType.COLLECTION;
 
 public class LibraryDemo {
 
@@ -24,23 +21,23 @@ public class LibraryDemo {
 
             ServicesHolder servicesHolder = new ServiceInitializer().initServices(storageType);
             BasicDataInitializer dataInitializer = DataInitializerFactory.getDataInititalizer(dataInitializerType, servicesHolder);
-            try {
-                dataInitializer.initData();
-            }catch (BadBookTypeException e) {
-                System.out.print(e.getMessage() + ": ");
-                System.out.println(e.getNameOfBook());
-            }
+            dataInitializer.initData();
 
             BookService bookService = servicesHolder.getBookService();
             AuthorService authorService = servicesHolder.getAuthorService();
 
             bookService.print();
             authorService.print();
-        /*    String path = "C:\\Users\\DS\\Desktop\\export.txt";
+
+      /*     Path tempFile = Files.createTempFile("my-file", ".txt");
+
             LibraryExportData lib = new LibraryExportData();
-            lib.exportAll(path, servicesHolder);*/
+            String path = tempFile.toAbsolutePath().toString();
+            lib.exportAll(path , servicesHolder);
+
+            System.out.println("EXPORT FILE IS " + path);*/
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }

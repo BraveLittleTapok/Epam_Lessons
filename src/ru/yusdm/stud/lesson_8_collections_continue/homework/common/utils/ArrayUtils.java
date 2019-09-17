@@ -1,4 +1,4 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils;
 
 public final class ArrayUtils {
     private ArrayUtils() {

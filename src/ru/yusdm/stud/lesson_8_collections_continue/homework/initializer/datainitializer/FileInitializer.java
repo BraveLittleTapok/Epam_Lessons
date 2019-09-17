@@ -1,12 +1,11 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.FileUtils;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.BadBookTypeException;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomExceptions;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.FileUtils;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomException;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -16,7 +15,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.CollectionUtils.mutableListOf;
+import static ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.CollectionUtils.mutableListOf;
 
 /**
  * Created by Dinara Shabanova on 12.09.2019.
@@ -26,7 +25,7 @@ import static src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.ut
  */
 public class FileInitializer extends BasicDataInitializer {
 
-    private static final String PATH = "/resource/ru/yusdm/stud/lesson_8_collections_continue/homework/DataLibrary.txt";
+    private static final String PATH = "/ru/yusdm/stud/lesson_8_collections_continue/homework/initializer/datainitializer/DataLibrary.txt";
 
     public FileInitializer(ServicesHolder servicesHolder) {
         super(servicesHolder);
@@ -40,24 +39,22 @@ public class FileInitializer extends BasicDataInitializer {
 
     }
 
-    private void parseFile(List<String> stringsFromFile) throws CustomExceptions {
+    private void parseFile(List<String> stringsFromFile) throws CustomException {
         for (String str : stringsFromFile) {
             if (!str.contains("/*")) {
                 //Split by |
                 List<String> listOfStrings = new ArrayList<>(Arrays.asList(str.split("\\|")));
                 deleteSplittedCharacter(listOfStrings);
                 if (listOfStrings.size() == 7) {
-                    Author newAuthor = valueOfInputAuthor(ParseString.getParseInputAuthor(listOfStrings));
-                    Book newBook = valueOfInputBook(ParseString.getParseInputBook(listOfStrings));
+                    Author newAuthor = valueOfInputAuthor(ParseStringsFromInputEntity.getParseInputAuthor(listOfStrings));
+                    Book newBook = valueOfInputBook(ParseStringsFromInputEntity.getParseInputBook(listOfStrings));
                     if (this.servicesHolder.getAuthorService().count() == 0) {
                         addBookAndAuthorInStorage(newBook, newAuthor);
                     } else {
                         checkAndAddEntity(newAuthor, newBook);
                     }
-
                 } else {
-                    System.out.println("Something went wrong");
-                    break;
+                    throw new CustomException("Bad format file txt");
                 }
             }
         }
@@ -119,7 +116,7 @@ public class FileInitializer extends BasicDataInitializer {
         this.servicesHolder.getAuthorService().add(author);
     }
 
-    private Book valueOfInputBook(InputBook inputBook) throws CustomExceptions {
+    private Book valueOfInputBook(InputBook inputBook) throws CustomException {
         return valueOfBook(inputBook.getBookFamily(), inputBook);
     }
 

@@ -1,10 +1,10 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer;
 
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.BookGenre;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.BadBookTypeException;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomExceptions;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
-import src.ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.BookGenre;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.BadBookTypeException;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.exceptions.CustomException;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.InputAuthor;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Dinara Shabanova on 12.09.2019.
  */
-public class ParseString {
+public class ParseStringsFromInputEntity {
 
     static InputAuthor getParseInputAuthor(List<String> listOfStrings) {
         List<String> nameOfAuthor = new ArrayList<>(Arrays.asList(listOfStrings.get(0).split(" ")));
@@ -25,7 +25,7 @@ public class ParseString {
         return inputAuthor;
     }
 
-    static InputBook getParseInputBook(List<String> listOfStrings) throws CustomExceptions {
+    static InputBook getParseInputBook(List<String> listOfStrings) throws CustomException {
         InputBook inputBook = new InputBook();
         inputBook.setName(listOfStrings.get(2));
         String strTrim = listOfStrings.get(3).trim();
@@ -33,13 +33,13 @@ public class ParseString {
         strTrim = listOfStrings.get(4).trim();
         inputBook.setTotalPages(Integer.parseInt(strTrim));
         inputBook.setBookFamily(getParseBookFamily(listOfStrings.get(6)));
-            strTrim = listOfStrings.get(5).trim();
-            if (BookGenre.hasValue(strTrim)) {
-                inputBook.setBookGenre(BookGenre.setBookGenre(strTrim));
-                return inputBook;
-            } else {
-                throw new BadBookTypeException("Bad Genre of the Book", inputBook.getName());
-            }
+        strTrim = listOfStrings.get(5).trim();
+        if (BookGenre.hasValue(strTrim)) {
+            inputBook.setBookGenre(BookGenre.setBookGenre(strTrim));
+            return inputBook;
+        } else {
+            throw new BadBookTypeException("Bad Genre of the Book", inputBook.getName());
+        }
     }
 
     private static String getParseBookFamily(String s) {

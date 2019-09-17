@@ -1,4 +1,4 @@
-package src.ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils;
+package ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils;
 
 import java.io.File;
 import java.io.IOException;

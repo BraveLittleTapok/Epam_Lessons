@@ -9,37 +9,52 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.author.I
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.InputBook;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
+import java.io.File;
 import java.util.List;
+
+import static ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.CollectionUtils.mutableListOf;
 
 /**
  * Created by Dinara Shabanova on 12.09.2019.
  */
 public abstract class BasicDataInitializer {
     protected final ServicesHolder servicesHolder;
+    private List<Author> authors = getParsedData();
 
-    protected BasicDataInitializer(ServicesHolder servicesHolder) {
+    protected BasicDataInitializer(ServicesHolder servicesHolder) throws Exception {
         this.servicesHolder = servicesHolder;
     }
 
-    public abstract void initData() throws Exception;
-
-    protected Book valueOfInputHandWrittenBook(InputBook inputBook) {
-        HandWrittenBook book = new HandWrittenBook();
-        book.setName(inputBook.getName());
-        book.setPublishYear(inputBook.getPublishYear());
-        book.setPaint(inputBook.getPaint());
-        book.setBookGenre(inputBook.getBookGenre());
-
-        return book;
+    public void initData() {
+        for (Author author : authors) {
+            this.servicesHolder.getAuthorService().add(author);
+            for (Book bookToAdd : author.getBooks()) {
+                bookToAdd.setAuthors(mutableListOf(author));
+                if (this.servicesHolder.getBookService().count() == 0) { //if storage is empty
+                    this.servicesHolder.getBookService().add(bookToAdd);
+                } else {
+                    boolean newBookAddedInLibrary = false;
+                    for (Book bookAlreadyInStorage : this.servicesHolder.getBookService().getAllBooks()) {  //if book has several authors
+                        if (bookToAdd.getName().equalsIgnoreCase(bookAlreadyInStorage.getName())) {
+                            updateListOfAuthorsForBook(bookAlreadyInStorage, author);
+                            newBookAddedInLibrary = true;
+                        }
+                    }
+                    if (!newBookAddedInLibrary) {
+                        this.servicesHolder.getBookService().add(bookToAdd);
+                    }
+                }
+            }
+        }
     }
 
-    protected Book valueOfInputPrintedBook(InputBook inputBook) {
-        PrintedBook book = new PrintedBook();
-        book.setName(inputBook.getName());
-        book.setPublishYear(inputBook.getPublishYear());
-        book.setFontFamily(inputBook.getFontFamily());
-        book.setBookGenre(inputBook.getBookGenre());
-        return book;
+    public abstract List<Author> getParsedData() throws Exception;
+
+    protected static void updateListOfBooksForAuthor(Author authorAlreadyExist, Book book) {
+        List<Book> booksAlreadyAddInAuthor = authorAlreadyExist.getBooks();
+        booksAlreadyAddInAuthor.add(book);
+        authorAlreadyExist.setBooks(booksAlreadyAddInAuthor);
+        book.setAuthors(mutableListOf(authorAlreadyExist));
     }
 
     protected static void updateListOfAuthorsForBook(Book bookAlreadyExist, Author newAuthor) {
@@ -49,24 +64,24 @@ public abstract class BasicDataInitializer {
     }
 
     protected static Book valueOfBook(String type, InputBook inputBook) throws CustomException {
-        Book book = null;
+        Book book;
         try {
             String trimType = type.trim();
             if ("printed".equalsIgnoreCase(trimType)) {
                 book = new PrintedBook();
             } else if ("hand".equalsIgnoreCase(trimType)) {
                 book = new HandWrittenBook();
-            } else if (type == null || stringIsEmpty(trimType)) {
-                book = new Book();
+            } else if (type == null || (trimType.length() == 0)) {
+                throw new NullPointerException();
             } else {
                 throw new CustomException("Unknown type of book");
             }
-            book.setName(inputBook.getName());
-            book.setPublishYear(inputBook.getPublishYear());
-            book.setBookGenre(inputBook.getBookGenre());
-        } catch (CustomException e) {
-            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            book = new Book();
         }
+        book.setName(inputBook.getName());
+        book.setPublishYear(inputBook.getPublishYear());
+        book.setBookGenre(inputBook.getBookGenre());
         return book;
     }
 
@@ -79,9 +94,8 @@ public abstract class BasicDataInitializer {
         return author;
     }
 
-    private static boolean stringIsEmpty(String str){
-        String returnString = str.replace(" ", "");
-        return returnString.length() == 0 ? true : false;
+    protected static boolean isFileValid(File file) {
+        return file != null && file.isFile() && file.exists();
     }
 
 }

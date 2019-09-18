@@ -8,6 +8,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.book.Inp
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -27,19 +28,19 @@ public class FileInitializer extends BasicDataInitializer {
 
     private static final String PATH = "/ru/yusdm/stud/lesson_8_collections_continue/homework/initializer/datainitializer/DataLibrary.txt";
 
-    public FileInitializer(ServicesHolder servicesHolder) {
+    public FileInitializer(ServicesHolder servicesHolder) throws Exception {
         super(servicesHolder);
     }
 
     @Override
-    public void initData() throws Exception {
+    public List<Author> getParsedData() throws IOException, CustomException {
         File fileWithInitData = FileUtils.createFileFromResource("java_core", "any", PATH);
         List<String> data = Files.readAllLines(Paths.get(fileWithInitData.getAbsolutePath()));
-        parseFile(data);
-
+        return parseFile(data);
     }
 
-    private void parseFile(List<String> stringsFromFile) throws CustomException {
+    private List<Author> parseFile(List<String> stringsFromFile) throws CustomException {
+        List<Author> authors = new ArrayList<>();
         for (String str : stringsFromFile) {
             if (!str.contains("/*")) {
                 //Split by |
@@ -48,49 +49,28 @@ public class FileInitializer extends BasicDataInitializer {
                 if (listOfStrings.size() == 7) {
                     Author newAuthor = valueOfInputAuthor(ParseStringsFromInputEntity.getParseInputAuthor(listOfStrings));
                     Book newBook = valueOfInputBook(ParseStringsFromInputEntity.getParseInputBook(listOfStrings));
-                    if (this.servicesHolder.getAuthorService().count() == 0) {
-                        addBookAndAuthorInStorage(newBook, newAuthor);
+                    if (authors.size() == 0) {
+                        newAuthor.setBooks(mutableListOf(newBook));
+                        authors.add(newAuthor);
                     } else {
-                        checkAndAddEntity(newAuthor, newBook);
+                        boolean authorIsAlreadyExist = false;
+                        for (Author authorAlreadyExist : authors) {
+                            if (newAuthor.getLastName().equals(authorAlreadyExist.getLastName())) {
+                                authorIsAlreadyExist = true;
+                                updateListOfBooksForAuthor(authorAlreadyExist, newBook);
+                            }
+                        }
+                        if (!authorIsAlreadyExist) {
+                            newAuthor.setBooks(mutableListOf(newBook));
+                            authors.add(newAuthor);
+                        }
                     }
                 } else {
                     throw new CustomException("Bad format file txt");
                 }
             }
         }
-    }
-
-    private void checkAndAddEntity(Author newAuthor, Book newBook) {
-        boolean authorAlreadyInLibrary = false;
-        boolean newBookAddedInLibrary = false;
-        for (Author authorAlreadyExist : this.servicesHolder.getAuthorService().getAllAuthors()) {
-            if (newAuthor.getLastName().equals(authorAlreadyExist.getLastName())) {
-                updateListOfBooksForAuthor(authorAlreadyExist, newBook);
-                this.servicesHolder.getBookService().add(newBook);
-                authorAlreadyInLibrary = true;
-                newBookAddedInLibrary = true;
-            }
-        }
-        if (!authorAlreadyInLibrary) {
-            for (Book bookAlreadyExist : this.servicesHolder.getBookService().getAllBooks()) {
-                if (newBook.getName().equals(bookAlreadyExist.getName())) {
-                    updateListOfAuthorsForBook(bookAlreadyExist, newAuthor);
-                    newAuthor.setBooks(mutableListOf(bookAlreadyExist));
-                    this.servicesHolder.getAuthorService().add(newAuthor);
-                    newBookAddedInLibrary = true;
-                }
-            }
-            if (!newBookAddedInLibrary) {
-                addBookAndAuthorInStorage(newBook, newAuthor);
-            }
-        }
-    }
-
-    private void updateListOfBooksForAuthor(Author authorAlreadyExist, Book book) {
-        List<Book> booksAlreadyAddInAuthor = authorAlreadyExist.getBooks();
-        booksAlreadyAddInAuthor.add(book);
-        authorAlreadyExist.setBooks(booksAlreadyAddInAuthor);
-        book.setAuthors(mutableListOf(authorAlreadyExist));
+        return authors;
     }
 
     private void deleteSplittedCharacter(List<String> listOfStrings) {
@@ -100,13 +80,6 @@ public class FileInitializer extends BasicDataInitializer {
                 iter.remove();
             }
         }
-    }
-
-    private void addBookAndAuthorInStorage(Book book, Author author) {
-        author.setBooks(mutableListOf(book));
-        book.setAuthors(mutableListOf(author));
-        this.servicesHolder.getBookService().add(book);
-        this.servicesHolder.getAuthorService().add(author);
     }
 
     private Book valueOfInputBook(InputBook inputBook) throws CustomException {

@@ -20,7 +20,7 @@ public class LibraryDemo {
             DataInitializerType dataInitializerType = FROM_XML_DOM_PARSER;
 
             ServicesHolder servicesHolder = new ServiceInitializer().initServices(storageType);
-            BasicDataInitializer dataInitializer = DataInitializerFactory.getDataInititalizer(dataInitializerType, servicesHolder);
+            BasicDataInitializer dataInitializer = DataInitializerFactory.getDataInitializer(dataInitializerType, servicesHolder);
             dataInitializer.initData();
 
             BookService bookService = servicesHolder.getBookService();
@@ -29,6 +29,7 @@ public class LibraryDemo {
             bookService.print();
             authorService.print();
 
+            System.out.println();
       /*     Path tempFile = Files.createTempFile("my-file", ".txt");
 
             LibraryExportData lib = new LibraryExportData();

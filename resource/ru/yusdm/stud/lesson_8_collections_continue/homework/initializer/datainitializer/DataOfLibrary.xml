@@ -31,5 +31,18 @@
             </book>
         </books>
     </author>
+    <author>
+        <name>Ellen</name>
+        <lastName>Ellenova</lastName>
+        <yearOfBirth>1564</yearOfBirth>
+        <books>
+            <book type = "hand">
+                <name>Gold fish</name>
+                <publishYear>2000</publishYear>
+                <totalPages>10</totalPages>
+                <genre>NOVEL</genre>
+            </book>
+        </books>
+    </author>
 
 </authors>

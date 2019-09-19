@@ -2,12 +2,19 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework;
 
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.*;
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookServiceImpl;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.BasicDataInitializer;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerFactory;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServiceInitializer;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.serviceinitializer.ServicesHolder;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import static ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType.*;
 import static ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType.COLLECTION;
@@ -28,8 +35,15 @@ public class LibraryDemo {
 
             bookService.print();
             authorService.print();
+        /*    System.out.println("BOOKA: " +
+                    ((BookServiceImpl)bookService).findBookByLambda(book -> book.getPublishYear() == 2000));*/
 
-            System.out.println();
+            List<Book> booksCopy = new ArrayList(bookService.getAllBooks());
+            Collections.sort(booksCopy, Comparator.comparing(Book::getName));
+
+            booksCopy.stream()
+                    .map(book -> book.getName())
+                    .forEach(System.out::println);
       /*     Path tempFile = Files.createTempFile("my-file", ".txt");
 
             LibraryExportData lib = new LibraryExportData();

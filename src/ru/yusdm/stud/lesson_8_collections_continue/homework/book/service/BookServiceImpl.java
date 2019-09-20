@@ -3,7 +3,9 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework.book.service;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class BookServiceImpl implements BookService {
 
@@ -13,6 +15,7 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBooks() {
         return bookRepo.getAllBooks();
     }
+
 
     public BookServiceImpl(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
@@ -55,5 +58,19 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findBooksByAuthorAsList(long authorId) {
         return bookRepo.findBooksByAuthorAsList(authorId);
+    }
+
+    public List<Book> findBookByLambda(Predicate<Book> lambda) {
+        List<Book> books = new ArrayList<>();
+        for (Book book : bookRepo.getAllBooks()) {
+            if (lambda.test(book)) {
+                books.add(book);
+            }
+        }
+        if (books != null) {
+            return books;
+        } else {
+            throw new NullPointerException("name not exist");
+        }
     }
 }

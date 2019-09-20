@@ -3,6 +3,10 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.service.AuthorService;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookService;
+<<<<<<< HEAD
+=======
+import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.*;
+>>>>>>> 2a9d2cdcf0bf3f06c3a5d432f2bcd12e11d827a3
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.service.BookServiceImpl;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.BasicDataInitializer;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerFactory;
@@ -16,7 +20,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+<<<<<<< HEAD
 import static ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType.FROM_XML_DOM_PARSER;
+=======
+import static ru.yusdm.stud.lesson_8_collections_continue.homework.initializer.datainitializer.DataInitializerType.*;
+>>>>>>> 2a9d2cdcf0bf3f06c3a5d432f2bcd12e11d827a3
 import static ru.yusdm.stud.lesson_8_collections_continue.homework.storage.StorageType.COLLECTION;
 
 public class LibraryDemo {
@@ -35,6 +43,7 @@ public class LibraryDemo {
 
             bookService.print();
             authorService.print();
+<<<<<<< HEAD
             //------------------------------------LAMBDA---------------------------------------------------------
 
             System.out.println("Search1: ");
@@ -42,6 +51,18 @@ public class LibraryDemo {
                     ((BookServiceImpl)bookService).findBookByLambda(book -> book.getPublishYear() == 2000);
 
             System.out.println(booksFind.toString());
+=======
+        /*    System.out.println("BOOKA: " +
+                    ((BookServiceImpl)bookService).findBookByLambda(book -> book.getPublishYear() == 2000));*/
+
+            List<Book> booksCopy = new ArrayList(bookService.getAllBooks());
+            Collections.sort(booksCopy, Comparator.comparing(Book::getName));
+
+            booksCopy.stream()
+                    .map(book -> book.getName())
+                    .forEach(System.out::println);
+      /*     Path tempFile = Files.createTempFile("my-file", ".txt");
+>>>>>>> 2a9d2cdcf0bf3f06c3a5d432f2bcd12e11d827a3
 
 
             System.out.println("Search2: ");

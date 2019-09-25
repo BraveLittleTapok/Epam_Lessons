@@ -5,6 +5,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class AuthorRepoArrayImpl implements AuthorRepo {
@@ -46,6 +47,11 @@ public class AuthorRepoArrayImpl implements AuthorRepo {
             }
         }
 
+        return null;
+    }
+
+    @Override
+    public List<Author> sort(List<Author> itemsToSort, Comparator<Author> comparator) {
         return null;
     }
 

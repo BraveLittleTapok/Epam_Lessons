@@ -5,6 +5,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionStorage;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -90,4 +91,9 @@ public class BookRepoCollectionImpl implements BookRepo {
         return found;
     }
 
+    @Override
+    public List<Book> sort(List<Book> itemsToSort, Comparator<Book> comparator) {
+        itemsToSort.sort(comparator);
+        return itemsToSort;
+    }
 }

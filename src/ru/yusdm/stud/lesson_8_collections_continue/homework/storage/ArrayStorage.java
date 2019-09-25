@@ -4,6 +4,8 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.common.utils.ArrayUtils;
 
+import java.util.function.Supplier;
+
 public final class ArrayStorage {
     private static final int CAPACITY = 10;
 
@@ -28,18 +30,18 @@ public final class ArrayStorage {
     public static void addBook(Book book) {
         book.setId(IdGenerator.generateId());
         if (bookIndex % (CAPACITY) == 0 && bookIndex != 0) {
-            increaseBooksStorage();
+            books = increaseStorage(books, () -> new Book[books.length + 5]);
         } else {
             books[bookIndex] = book;
         }
         bookIndex++;
     }
 
-    private static void increaseBooksStorage() {
+   /* private static void increaseBooksStorage() {
         Book[] books = new Book[authorIndex + CAPACITY];
         ArrayUtils.copyElements(ArrayStorage.books, books);
         ArrayStorage.books = books;
-    }
+    }*/
 
     public static void removeBook(Book book) {
         /**
@@ -90,7 +92,7 @@ public final class ArrayStorage {
         author.setId(IdGenerator.generateId());
 
         if (authorIndex % (CAPACITY) == 0 && authorIndex != 0) {
-            increaseAuthorsStorage();
+            authors = increaseStorage(authors, () -> new Author[authors.length + 5]);
         } else {
             authors[authorIndex] = author;
         }
@@ -98,10 +100,16 @@ public final class ArrayStorage {
         authorIndex++;
     }
 
-    private static void increaseAuthorsStorage() {
+  /*  private static void increaseAuthorsStorage() {
         Author[] authors = new Author[authorIndex + CAPACITY];
         ArrayUtils.copyElements(ArrayStorage.authors, authors);
         ArrayStorage.authors = authors;
+    }*/
+
+    private static <T> T[] increaseStorage(T[] oldArray, Supplier supplier) {
+        T[] newArray = (T[]) supplier.get();
+        ArrayUtils.copyElements(oldArray, newArray);
+        return newArray;
     }
 
     public static void removeAuthor(Author author) {

@@ -3,6 +3,7 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionStorage;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class AuthorRepoCollectionImpl implements AuthorRepo {
@@ -44,6 +45,11 @@ public class AuthorRepoCollectionImpl implements AuthorRepo {
             }
         }
 
+        return null;
+    }
+
+    @Override
+    public List<Author> sort(List<Author> itemsToSort, Comparator<Author> comparator) {
         return null;
     }
 }

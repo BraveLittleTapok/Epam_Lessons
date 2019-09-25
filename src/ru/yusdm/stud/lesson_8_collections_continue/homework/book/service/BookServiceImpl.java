@@ -4,6 +4,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -14,6 +15,24 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getAllBooks() {
         return bookRepo.getAllBooks();
+    }
+
+    @Override
+    public List<Book> findByName(String name) {
+        List<Book> result = findBookByField(book -> book.getName().equalsIgnoreCase(name));
+        if (result == null){
+            System.out.println("Books not found with name: " + name);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Book> findByPublishYear(Integer publishYear) {
+        List<Book> result = findBookByField(book -> book.getPublishYear() == publishYear);
+        if (result == null){
+            System.out.println("Books not found with publish year: " + publishYear);
+        }
+        return result;
     }
 
 
@@ -60,17 +79,22 @@ public class BookServiceImpl implements BookService {
         return bookRepo.findBooksByAuthorAsList(authorId);
     }
 
-    public List<Book> findBookByLambda(Predicate<Book> lambda) {
+    public List<Book> findBookByField(Predicate<Book> lambda) {
         List<Book> books = new ArrayList<>();
         for (Book book : bookRepo.getAllBooks()) {
             if (lambda.test(book)) {
                 books.add(book);
             }
         }
-        if (books != null) {
-            return books;
-        } else {
-            throw new NullPointerException("name not exist");
-        }
+        return  books;
+    }
+    @Override
+    public List<Book> sortByName(List<Book> books) {
+        return bookRepo.sort(books, Comparator.comparing(b -> String.valueOf(b.getName())));
+    }
+
+    @Override
+    public List<Book> sortByPublishYear(List<Book> books) {
+        return bookRepo.sort(books, Comparator.comparingInt(Book::getPublishYear));
     }
 }

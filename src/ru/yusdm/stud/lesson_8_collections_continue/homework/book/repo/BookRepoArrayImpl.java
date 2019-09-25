@@ -6,6 +6,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class BookRepoArrayImpl implements BookRepo {
@@ -43,6 +44,11 @@ public class BookRepoArrayImpl implements BookRepo {
             }
         }
 
+        return null;
+    }
+
+    @Override
+    public List<Book> sort(List<Book> itemsToSort, Comparator<Book> comparator) {
         return null;
     }
 

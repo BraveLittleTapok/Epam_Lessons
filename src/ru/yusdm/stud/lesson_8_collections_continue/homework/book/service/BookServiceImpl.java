@@ -6,6 +6,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class BookServiceImpl implements BookService {
@@ -20,7 +21,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findByName(String name) {
         List<Book> result = findBookByField(book -> book.getName().equalsIgnoreCase(name));
-        if (result == null){
+        if (result.size() == 0) {
             System.out.println("Books not found with name: " + name);
         }
         return result;
@@ -29,7 +30,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findByPublishYear(Integer publishYear) {
         List<Book> result = findBookByField(book -> book.getPublishYear() == publishYear);
-        if (result == null){
+        if (result.size() == 0) {
             System.out.println("Books not found with publish year: " + publishYear);
         }
         return result;
@@ -62,11 +63,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findById(Long bookId) {
-        if (bookId != null) {
-            return bookRepo.findById(bookId);
-        } else {
-            return null;
+        Optional<Book> result = Optional.ofNullable(bookRepo.findById(bookId));
+        if (!result.isPresent()) {
+            System.out.println("Book not exist with ID " + bookId.toString());
         }
+        return result.get();
     }
 
     @Override
@@ -86,8 +87,9 @@ public class BookServiceImpl implements BookService {
                 books.add(book);
             }
         }
-        return  books;
+        return books;
     }
+
     @Override
     public List<Book> sortByName(List<Book> books) {
         return bookRepo.sort(books, Comparator.comparing(b -> String.valueOf(b.getName())));

@@ -64,7 +64,6 @@ public class BookRepoCollectionImpl implements BookRepo {
                 return book;
             }
         }
-
         return null;
     }
 

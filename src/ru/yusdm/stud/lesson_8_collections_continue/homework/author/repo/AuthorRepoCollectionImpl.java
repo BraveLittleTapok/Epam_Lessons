@@ -5,6 +5,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionSt
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class AuthorRepoCollectionImpl implements AuthorRepo {
     @Override
@@ -38,13 +39,12 @@ public class AuthorRepoCollectionImpl implements AuthorRepo {
     }
 
     @Override
-    public Author findById(Long authorId) {
+    public Optional<Author> findById(Long authorId) {
         for (Author author : CollectionStorage.getAllAuthors()) {
-            if (author != null && authorId.equals(author.getId())) {
-                return author;
+            if (authorId.equals(author.getId())) {
+                return Optional.ofNullable(author);
             }
         }
-
         return null;
     }
 

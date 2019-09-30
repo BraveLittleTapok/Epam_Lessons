@@ -7,6 +7,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.CollectionSt
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Java------------
@@ -34,11 +35,9 @@ public class BookRepoCollectionImpl implements BookRepo {
 
     @Override
     public void print() {
-        for (Book book : CollectionStorage.getAllBooks()) {
-            if (book != null) {
-                System.out.println(book.toString());
-            }
-        }
+        CollectionStorage.getAllBooks().stream()
+                .filter(book -> book != null)
+                .forEach(System.out::println);
     }
 
     @Override
@@ -58,13 +57,10 @@ public class BookRepoCollectionImpl implements BookRepo {
     }
 
     @Override
-    public Book findById(Long bookId) {
-        for (Book book : CollectionStorage.getAllBooks()) {
-            if (book != null && bookId.equals(book.getId())) {
-                return book;
-            }
-        }
-        return null;
+    public Optional<Book> findById(Long bookId) {
+        return CollectionStorage.getAllBooks().stream()
+                .filter(book -> book.getId().equals(bookId))
+                .findFirst();
     }
 
     @Override
@@ -75,9 +71,7 @@ public class BookRepoCollectionImpl implements BookRepo {
     @Override
     public List<Book> findBooksByAuthorAsList(long authorId) {
         List<Book> found = new ArrayList<>();
-
         for (Book b : CollectionStorage.getAllBooks()) {
-
             for (Author a : b.getAuthors()) {
                 if (a != null && authorId == a.getId()) {
                     found.add(b);
@@ -86,7 +80,6 @@ public class BookRepoCollectionImpl implements BookRepo {
             }
 
         }
-
         return found;
     }
 

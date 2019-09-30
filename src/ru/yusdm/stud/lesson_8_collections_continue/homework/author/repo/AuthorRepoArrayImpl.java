@@ -3,10 +3,7 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework.author.repo;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class AuthorRepoArrayImpl implements AuthorRepo {
     @Override
@@ -40,13 +37,12 @@ public class AuthorRepoArrayImpl implements AuthorRepo {
     }
 
     @Override
-    public Author findById(Long authorId) {
+    public Optional<Author> findById(Long authorId) {
         for (Author author : ArrayStorage.getAllAuthors()) {
-            if (author != null && authorId.equals(author.getId())) {
-                return author;
+            if (authorId.equals(author.getId())) {
+                return Optional.ofNullable(author);
             }
         }
-
         return null;
     }
 

@@ -3,11 +3,11 @@ package ru.yusdm.stud.lesson_8_collections_continue.homework.book.service;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.repo.BookRepo;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService {
 
@@ -20,7 +20,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> findByName(String name) {
-        List<Book> result = findBookByField(book -> book.getName().equalsIgnoreCase(name));
+        List<Book> result = findBookByField(book -> book.getName().trim().equalsIgnoreCase(name));
         if (result.size() == 0) {
             System.out.println("Books not found with name: " + name);
         }
@@ -63,7 +63,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findById(Long bookId) {
-        Optional<Book> result = Optional.ofNullable(bookRepo.findById(bookId));
+        Optional<Book> result = bookRepo.findById(bookId);
         if (!result.isPresent()) {
             System.out.println("Book not exist with ID " + bookId.toString());
         }
@@ -81,13 +81,9 @@ public class BookServiceImpl implements BookService {
     }
 
     public List<Book> findBookByField(Predicate<Book> lambda) {
-        List<Book> books = new ArrayList<>();
-        for (Book book : bookRepo.getAllBooks()) {
-            if (lambda.test(book)) {
-                books.add(book);
-            }
-        }
-        return books;
+        return bookRepo.getAllBooks().stream()
+                .filter((book) -> lambda.test(book))
+                .collect(Collectors.toList());
     }
 
     @Override

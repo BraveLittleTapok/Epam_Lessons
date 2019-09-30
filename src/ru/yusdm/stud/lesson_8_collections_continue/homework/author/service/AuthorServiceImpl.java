@@ -49,7 +49,6 @@ public class AuthorServiceImpl implements AuthorService {
         if (booksWithAuthor != null) {
             for (Book book : booksWithAuthor) {
                 book.deleteAuthor(author);
-
                 if (book.withoutAuthors()) {
                     bookRepo.delete(book);
                 }
@@ -67,7 +66,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author findById(Long authorId) {
         if (authorId != null) {
-            return authorRepo.findById(authorId);
+            return authorRepo.findById(authorId).get();
         } else {
             return null;
         }

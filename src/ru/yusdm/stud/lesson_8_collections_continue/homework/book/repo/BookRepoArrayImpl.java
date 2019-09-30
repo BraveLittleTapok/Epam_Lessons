@@ -4,10 +4,7 @@ import ru.yusdm.stud.lesson_8_collections_continue.homework.author.domain.Author
 import ru.yusdm.stud.lesson_8_collections_continue.homework.book.domain.Book;
 import ru.yusdm.stud.lesson_8_collections_continue.homework.storage.ArrayStorage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class BookRepoArrayImpl implements BookRepo {
 
@@ -37,10 +34,10 @@ public class BookRepoArrayImpl implements BookRepo {
     }
 
     @Override
-    public Book findById(Long bookId) {
+    public Optional<Book> findById(Long bookId) {
         for (Book book : ArrayStorage.getAllBooks()) {
-            if (book != null && bookId.equals(book.getId())) {
-                return book;
+            if (bookId.equals(book.getId())) {
+                return Optional.ofNullable(book);
             }
         }
 
